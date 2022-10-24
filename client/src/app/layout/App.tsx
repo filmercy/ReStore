@@ -1,16 +1,21 @@
 import { Container, CssBaseline, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
-import Catalog from "../../features/catalog/Catalog";
+
 import { Product } from "../../product";
 import Header from "./Header";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Route } from "react-router-dom";
+import HomePage from "../../features/home/HomePage";
+import AboutPage from "../../features/about/AboutPage";
+import ContactPage from "../../features/contact/ContactPage";
+import ProductDetails from "../../features/catalog/ProductDetails";
+import Catalog from "../../features/catalog/Catalog";
 
 
 function App() {
 
   const [darkMode, setDarkMode]= useState(false);
-  const [products, setProducts]= useState<Product[]>([
-    ]);
+ 
   const paletteType= darkMode? 'dark': 'light';
   const theme = createTheme({
     palette: {
@@ -34,13 +39,6 @@ function App() {
   });
   
 
-  useEffect(()=>{
-    fetch('http://localhost:5000/api/products')
-    .then(response=>response.json())
-    .then(data =>setProducts(data))
-  }, [])  
-
-
   function handleThemeChange(){
      setDarkMode(!darkMode);
   }
@@ -52,7 +50,12 @@ function App() {
       <CssBaseline/>
       <Header darkMode={darkMode} setDarkMode={handleThemeChange}/>
       <Container>
-        <Catalog  products={products}/>
+        <Route exact path='/' component={HomePage}/> 
+        <Route exact path='/catalog' component={Catalog}/>
+        <Route path='/catalog/:id' component={ProductDetails}/>
+        <Route path='/contact' component={ContactPage}/>
+        <Route path='/about' component={AboutPage}/>
+
       </Container>
     </>
   </ThemeProvider>
