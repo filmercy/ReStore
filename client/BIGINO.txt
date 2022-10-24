@@ -1,0 +1,7 @@
+startup API:
+1) nuova console e cd a directory API
+2) comando - dotnet watch run
+
+startup Client React
+1) nuova console e cd a directory Client
+2) comando - npm start
