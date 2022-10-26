@@ -12,7 +12,7 @@ export default function Catalog(){
     fetch('http://localhost:5000/api/products')
     .then(response=>response.json())
     .then(data =>setProducts(data))
-  })
+  }, [])
 
     return (
       <>
